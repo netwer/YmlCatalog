@@ -5,6 +5,12 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YmlCatalogApp", "YmlCatalogApp\YmlCatalogApp.csproj", "{1A5829B6-2607-404F-8DC6-168FCA4293ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YmlCatalogModel", "YmlCatalogModel\YmlCatalogModel.csproj", "{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YmlCatalogLib", "YmlCatalogLib\YmlCatalogLib.csproj", "{4094A2A3-1179-49BE-B6BF-50387FB9425F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YmlCatalogUnitTestProject", "YmlCatalogUnitTestProject\YmlCatalogUnitTestProject.csproj", "{2833EDD2-F5DB-41AB-A033-E6B9146A222A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{1A5829B6-2607-404F-8DC6-168FCA4293ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A5829B6-2607-404F-8DC6-168FCA4293ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A5829B6-2607-404F-8DC6-168FCA4293ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4094A2A3-1179-49BE-B6BF-50387FB9425F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4094A2A3-1179-49BE-B6BF-50387FB9425F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4094A2A3-1179-49BE-B6BF-50387FB9425F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4094A2A3-1179-49BE-B6BF-50387FB9425F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2833EDD2-F5DB-41AB-A033-E6B9146A222A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2833EDD2-F5DB-41AB-A033-E6B9146A222A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2833EDD2-F5DB-41AB-A033-E6B9146A222A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2833EDD2-F5DB-41AB-A033-E6B9146A222A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
