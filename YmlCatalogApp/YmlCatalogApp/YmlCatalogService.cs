@@ -8,10 +8,10 @@ namespace YmlCatalogApp
 {
     public class YmlCatalogService : IYmlCatalogService
     {
-        private readonly ICatalog _catalog;
+        private readonly IYmlCatalog _catalog;
         private YmlCatalog _ymlCatalog;
 
-        public YmlCatalogService(ICatalog catalog)
+        public YmlCatalogService(IYmlCatalog catalog)
         {
             _catalog = catalog;
         }

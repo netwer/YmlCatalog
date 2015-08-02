@@ -41,11 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IYmlCatalogService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YmlCatalogService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YmlCatalogLib\YmlCatalogLib.csproj">
+      <Project>{4094A2A3-1179-49BE-B6BF-50387FB9425F}</Project>
+      <Name>YmlCatalogLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YmlCatalogModel\YmlCatalogModel.csproj">
+      <Project>{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}</Project>
+      <Name>YmlCatalogModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

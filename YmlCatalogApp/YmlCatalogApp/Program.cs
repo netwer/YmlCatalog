@@ -1,5 +1,4 @@
 ﻿using System;
-using YmlCatalogLib;
 using YmlCatalogLib.Catalog;
 
 namespace YmlCatalogApp
