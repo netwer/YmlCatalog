@@ -41,9 +41,9 @@ namespace YmlCatalogLib.Catalog
                 var catalogTask = GetXmlYmlCatalog(path, token);
                 catalog = catalogTask.Result;
             }
-            catch
+            catch (Exception e)
             {
-                throw;
+                throw new YmlCatalogException(e.Message);
             }
 
             return catalog;
@@ -79,9 +79,9 @@ namespace YmlCatalogLib.Catalog
                 var sendResultTask = SendJson(offerInJson, urlToSend);
                 sendResult = sendResultTask.Result;
             }
-            catch
+            catch(Exception e)
             {
-                throw;
+                throw new YmlCatalogException(e.Message);
             }
 
             return sendResult;
