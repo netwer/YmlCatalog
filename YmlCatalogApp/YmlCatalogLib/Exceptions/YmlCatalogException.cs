@@ -2,6 +2,9 @@
 
 namespace YmlCatalogLib.Exceptions
 {
+    /// <summary>
+    /// YmlCatalogException
+    /// </summary>
     public class YmlCatalogException : Exception
     {
         public YmlCatalogException() { }

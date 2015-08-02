@@ -1,20 +1,28 @@
 ﻿using System;
-using YmlCatalogLib;
 using YmlCatalogLib.Catalog;
 using YmlCatalogLib.Exceptions;
 using YmlCatalogModel;
 
 namespace YmlCatalogApp
 {
+    /// <summary>
+    /// Implementation of IYmlCatalogService
+    /// </summary>
     public class YmlCatalogService : IYmlCatalogService
     {
+        #region Fields
+
         private readonly IYmlCatalog _catalog;
         private YmlCatalog _ymlCatalog;
+
+        #endregion
 
         public YmlCatalogService(IYmlCatalog catalog)
         {
             _catalog = catalog;
         }
+
+        #region Public methods
 
         public void DisplayYmlCatalog(string url)
         {
@@ -46,5 +54,7 @@ namespace YmlCatalogApp
                 Console.WriteLine(e.Message);
             }
         }
+
+        #endregion
     }
 }

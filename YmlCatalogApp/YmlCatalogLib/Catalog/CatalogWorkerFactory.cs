@@ -5,7 +5,7 @@
         /// <summary>
         /// Create instance for catalog
         /// </summary>
-        /// <typeparam name="T">The class implements the ICatalog</typeparam>
+        /// <typeparam name="T">The class implements the IYmlCatalog</typeparam>
         /// <returns></returns>
         public static T CreateInstance<T>() where T : IYmlCatalog, new()
         {
