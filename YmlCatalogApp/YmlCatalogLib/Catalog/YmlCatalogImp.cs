@@ -36,16 +36,9 @@ namespace YmlCatalogLib.Catalog
 
             YmlCatalog catalog =new YmlCatalog();
 
-            try
-            {
-                var catalogTask = GetXmlYmlCatalog(path, token);
-                catalog = catalogTask.Result;
-            }
-            catch (Exception e)
-            {
-                throw new YmlCatalogException(e.Message);
-            }
-
+            var catalogTask = GetXmlYmlCatalog(path, token);
+            catalog = catalogTask.Result;
+            
             return catalog;
         }
 
@@ -74,15 +67,8 @@ namespace YmlCatalogLib.Catalog
             string offerInJson = new JavaScriptSerializer().Serialize(offer);
             bool sendResult = true;
 
-            try
-            {
-                var sendResultTask = SendJson(offerInJson, urlToSend);
-                sendResult = sendResultTask.Result;
-            }
-            catch(Exception e)
-            {
-                throw new YmlCatalogException(e.Message);
-            }
+            var sendResultTask = SendJson(offerInJson, urlToSend);
+            sendResult = sendResultTask.Result;
 
             return sendResult;
         }
@@ -108,7 +94,6 @@ namespace YmlCatalogLib.Catalog
         /// <returns>Task YmlCatalog.</returns>
         async private Task<YmlCatalog> GetXmlYmlCatalog(string path, CancellationToken cancellationToken)
         {
-            
             var asyncResult = GetXmlYmlCatalogAsync(path, cancellationToken);
             YmlCatalog catalog = await asyncResult;
             return catalog;
@@ -145,23 +130,20 @@ namespace YmlCatalogLib.Catalog
         {
             return await Task.Run(() =>
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlToSend);
+                var httpWebRequest = (HttpWebRequest) WebRequest.Create(urlToSend);
                 httpWebRequest.ContentType = "text/json";
                 httpWebRequest.Method = "POST";
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     streamWriter.Write(json);
-                    streamWriter.Flush();
                 }
 
-               var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-               using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-               {
-                   var result = streamReader.ReadToEnd();
-               }
-                return true;
-            }); 
+                var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
+                if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    return true;
+                return false;
+            });
         }
 
         /// <summary>

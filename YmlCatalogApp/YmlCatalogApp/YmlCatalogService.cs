@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using YmlCatalogLib.Catalog;
 using YmlCatalogLib.Exceptions;
 using YmlCatalogModel;
@@ -38,9 +39,28 @@ namespace YmlCatalogApp
                 Console.WriteLine("URL: {0}", _ymlCatalog.Shop.Url);
                 Console.WriteLine("Offers count: {0}", _ymlCatalog.Shop.Offers.OfferList.Count);
             }
-            catch (YmlCatalogException e)
+            catch (AggregateException e)
             {
-                Console.WriteLine(e.Message);
+                e.Handle((x) =>
+                {
+                    if (x is YmlCatalogException)
+                    {
+                        Console.WriteLine("Yml Catalog Exception");
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Please press any key to end the program");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Other Exception");
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Please press any key to end the program");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                    return true;  
+                });
             }
         }
 
@@ -51,9 +71,28 @@ namespace YmlCatalogApp
                 _catalog.SendOffer(_ymlCatalog, offerId, url);
                 Console.WriteLine("The offer sent successfully");
             }
-            catch (YmlCatalogException e)
+            catch (AggregateException e)
             {
-                Console.WriteLine(e.Message);
+                e.Handle((x) =>
+                {
+                    if (x is YmlCatalogException)
+                    {
+                        Console.WriteLine("Yml Catalog Exception");
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Please press any key to end the program");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Other Exception");
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Please press any key to end the program");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                    return true;
+                });
             }
         }
 
