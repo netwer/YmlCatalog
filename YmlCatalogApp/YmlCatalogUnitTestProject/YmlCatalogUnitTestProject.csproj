@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>f1cdfdcf-e803-4530-b1a5-f1e43abbe0d0</ProjectGuid>
+    <ProjectGuid>{2833EDD2-F5DB-41AB-A033-E6B9146A222A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YmlCatalogUnitTestProject</RootNamespace>
@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="YmlCatalogUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YmlCatalogLib\YmlCatalogLib.csproj">
+      <Project>{4094A2A3-1179-49BE-B6BF-50387FB9425F}</Project>
+      <Name>YmlCatalogLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YmlCatalogModel\YmlCatalogModel.csproj">
+      <Project>{4E4CCB8D-BD0A-4384-98F0-E2BB17C175F8}</Project>
+      <Name>YmlCatalogModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
