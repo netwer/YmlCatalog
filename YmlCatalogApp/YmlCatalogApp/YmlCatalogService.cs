@@ -14,21 +14,23 @@ namespace YmlCatalogApp
 
         private readonly IYmlCatalog _catalog;
         private YmlCatalog _ymlCatalog;
+        private string _urlToYml;
 
         #endregion
 
-        public YmlCatalogService(IYmlCatalog catalog)
+        public YmlCatalogService(IYmlCatalog catalog, string urlToYml)
         {
             _catalog = catalog;
+            _urlToYml = urlToYml;
         }
 
         #region Public methods
 
-        public void DisplayYmlCatalog(string url)
+        public void DisplayYmlCatalog()
         {
             try
             {
-                _ymlCatalog = _catalog.GetYmlCatalog(url);
+                _ymlCatalog = _catalog.GetYmlCatalog(_urlToYml);
                 Console.WriteLine("Yml Catalog:");
                 Console.WriteLine("Date: {0}", _ymlCatalog.Date);
                 Console.WriteLine("Name: {0}", _ymlCatalog.Shop.Name);

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
+using JetBrains.Annotations;
 using YmlCatalogLib.Exceptions;
 using YmlCatalogModel;
 using YmlCatalogModel.Offers;
@@ -15,7 +16,7 @@ namespace YmlCatalogLib.Catalog
     /// <summary>
     /// Implementation of IYmlCatalog
     /// </summary>
-    public class YmlCatalogWorker : IYmlCatalog
+    public class YmlCatalogImp : IYmlCatalog
     {
         /// <summary>
         /// Gets the yml catalog.
@@ -27,23 +28,22 @@ namespace YmlCatalogLib.Catalog
         /// or
         /// Other exception.
         /// </exception>
+        [NotNull]
         public YmlCatalog GetYmlCatalog(string path)
         {
-            if(String.IsNullOrEmpty(path))
-                throw new YmlCatalogException("Path to XML is null.");
-            
             var tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
 
-            YmlCatalog catalog = new YmlCatalog();
+            YmlCatalog catalog =new YmlCatalog();
 
             try
             {
-                catalog = GetXmlYmlCatalog(path, token).Result;
+                var catalogTask = GetXmlYmlCatalog(path, token);
+                catalog = catalogTask.Result;
             }
-            catch (Exception e)
+            catch
             {
-                throw new YmlCatalogException(e.Message);
+                throw;
             }
 
             return catalog;
@@ -54,14 +54,14 @@ namespace YmlCatalogLib.Catalog
         /// </summary>
         /// <param name="ymlCatalog">The yml catalog.</param>
         /// <param name="offerId">The offer id.</param>
-        /// <param name="url">The URL to send.</param>
+        /// <param name="urlToSend">The URL to send.</param>
         /// <returns>true</returns>
         /// <exception cref="YmlCatalogException">
         /// Yml Catalog is null
         /// or
         /// Other exception.
         /// </exception>
-        public bool SendOffer(YmlCatalog ymlCatalog, int offerId, string url)
+        public bool SendOffer(YmlCatalog ymlCatalog, int offerId, string urlToSend)
         {
             if(ymlCatalog == null)
                 throw new YmlCatalogException("Yml Catalog is null.");
@@ -76,14 +76,42 @@ namespace YmlCatalogLib.Catalog
 
             try
             {
-                sendResult = SendJson(offerInJson, url).Result;
+                var sendResultTask = SendJson(offerInJson, urlToSend);
+                sendResult = sendResultTask.Result;
             }
-            catch (Exception e)
+            catch
             {
-                throw new YmlCatalogException(e.Message);
+                throw;
             }
 
             return sendResult;
+        }
+
+        /// <summary>
+        /// Sends the json.
+        /// </summary>
+        /// <param name="offerInJson">The offer in json.</param>
+        /// <param name="urlToSend">The URL to send.</param>
+        /// <returns>Task bool</returns>
+        async private Task<bool> SendJson(string offerInJson, string urlToSend)
+        {
+            var asyncResult = SendJsonAsync(offerInJson, urlToSend);
+            bool sendResult = await asyncResult;
+            return sendResult;
+        }
+
+        /// <summary>
+        /// Gets the XML yml catalog.
+        /// </summary>
+        /// <param name="path">The path to catalog.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>Task YmlCatalog.</returns>
+        async private Task<YmlCatalog> GetXmlYmlCatalog(string path, CancellationToken cancellationToken)
+        {
+            
+            var asyncResult = GetXmlYmlCatalogAsync(path, cancellationToken);
+            YmlCatalog catalog = await asyncResult;
+            return catalog;
         }
 
         /// <summary>
@@ -92,7 +120,7 @@ namespace YmlCatalogLib.Catalog
         /// <param name="path">The path to catalog.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>YmlCatalog.</returns>
-        async private Task<YmlCatalog> GetXmlYmlCatalog(string path,CancellationToken cancellationToken)
+        async private Task<YmlCatalog> GetXmlYmlCatalogAsync(string path,CancellationToken cancellationToken)
         {
             return await Task.Run(() =>
             {
@@ -111,13 +139,13 @@ namespace YmlCatalogLib.Catalog
         /// Send the json.
         /// </summary>
         /// <param name="json">The json.</param>
-        /// <param name="url">The URL to send.</param>
+        /// <param name="urlToSend">The URL to send.</param>
         /// <returns>true.</returns>
-        async private Task<bool> SendJson(string json, string url)
+        async private Task<bool> SendJsonAsync(string json, string urlToSend)
         {
             return await Task.Run(() =>
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(urlToSend);
                 httpWebRequest.ContentType = "text/json";
                 httpWebRequest.Method = "POST";
 
@@ -125,11 +153,13 @@ namespace YmlCatalogLib.Catalog
                 {
                     streamWriter.Write(json);
                     streamWriter.Flush();
-                    streamWriter.Close();
                 }
 
-                //no request to url
-                //var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+               var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+               using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+               {
+                   var result = streamReader.ReadToEnd();
+               }
                 return true;
             }); 
         }

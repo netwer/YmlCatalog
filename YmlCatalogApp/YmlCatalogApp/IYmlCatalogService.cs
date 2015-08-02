@@ -10,8 +10,7 @@ namespace YmlCatalogApp
         /// <summary>
         /// Displays the yml catalog.
         /// </summary>
-        /// <param name="url">The URL.</param>
-        void DisplayYmlCatalog(string url);
+        void DisplayYmlCatalog();
 
         /// <summary>
         /// Send the offer.

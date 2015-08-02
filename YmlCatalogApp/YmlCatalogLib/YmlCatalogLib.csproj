@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=9.1.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.9.1.1\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -40,17 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catalog\CatalogWorkerFactory.cs" />
     <Compile Include="Exceptions\YmlCatalogException.cs" />
     <Compile Include="Catalog\IYmlCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Catalog\YmlCatalogWorker.cs" />
+    <Compile Include="Catalog\YmlCatalogImp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YmlCatalogModel\YmlCatalogModel.csproj">
       <Project>{4e4ccb8d-bd0a-4384-98f0-e2bb17c175f8}</Project>
       <Name>YmlCatalogModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

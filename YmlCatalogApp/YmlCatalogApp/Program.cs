@@ -7,8 +7,8 @@ namespace YmlCatalogApp
     {
         static void Main(string[] args)
         {
-            IYmlCatalogService service = new YmlCatalogService(CatalogWorkerFactory.CreateInstance<YmlCatalogWorker>());
-            service.DisplayYmlCatalog(@"http://partner.market.yandex.ru/pages/help/YML.xml");
+            IYmlCatalogService service = new YmlCatalogService(new YmlCatalogImp(), @"http://partner.market.yandex.ru/pages/help/YML.xml");
+            service.DisplayYmlCatalog();
             service.SendOffer(12344, @"https://www.google.ru/?gws_rd=ssl");
             Console.WriteLine("Enter key...");
             Console.ReadKey();

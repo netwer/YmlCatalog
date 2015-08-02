@@ -19,8 +19,8 @@ namespace YmlCatalogLib.Catalog
         /// </summary>
         /// <param name="ymlCatalog">The yml catalog.</param>
         /// <param name="offerId">The offer id.</param>
-        /// <param name="url">The URL to send.</param>
+        /// <param name="urlToSend">The URL to send.</param>
         /// <returns></returns>
-        bool SendOffer(YmlCatalog ymlCatalog, int offerId, string url);
+        bool SendOffer(YmlCatalog ymlCatalog, int offerId, string urlToSend);
     }
 }
